@@ -7,10 +7,14 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { MapaEditarComponent } from './components/mapa/mapa-editar.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-
+//el entry es para indicar que el editar del dialog es inyectado.
 
 @NgModule({
+  entryComponents:[
+    MapaEditarComponent
+  ],
   declarations: [
     AppComponent,
     MapaComponent,
@@ -20,6 +24,7 @@ import { AgmCoreModule } from '@agm/core';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB8x76gCEmsrDfAH9gGkThxv1dWXfqNnAQ'
     })

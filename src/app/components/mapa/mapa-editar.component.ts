@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Inject} from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormBuilder, FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-mapa-editar',
   templateUrl: './mapa-editar.component.html',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapaEditarComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor(
+    public fb: FormBuilder,
+    public dialogRef: MatDialogRef <MapaEditarComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log(data);
+      this.form =fb.group({
+        'titulo':data.titulo,
+        'desc':data.desc
+      });
+
+    }
 
   ngOnInit() {
   }
-
+  guardarCambios(){
+    //console.log(this.form.value)
+    this.dialogRef.close(this.form.value);
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
